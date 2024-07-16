@@ -16,9 +16,10 @@ const Start= () => {
       <div className='start container'>
         <a href="https://www.instagram.com/focus.photolab/?utm_source=ig_web_button_share_sheet" className='logo'>
           <img src={logo} alt="logo" className='logo__img' />
-          <img src={photolab} alt="logo" className='logo__title'/>
+          {/* <img src={photolab} alt="logo" className='logo__title'/> */}
+        <h1 className='logo__title '>FOCUS PHOTOLAB</h1>
         </a>
-        <h1 className='start__title title'>Бронювання</h1>
+        <h2 className='start__title title'>Бронювання</h2>
         <Booking/>        
         <Location />
         <RulesOffers />
