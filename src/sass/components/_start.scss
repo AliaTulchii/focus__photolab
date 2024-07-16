@@ -1,0 +1,34 @@
+.start{
+    margin: 60px auto;
+    
+}
+
+.start__downmodal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.start__title{    
+    margin-bottom: 10px;
+    
+}
+
+.start__list{
+    margin-bottom: 92px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+// align-items: center;
+gap: 12px;
+}
+
+
+
+.start__subtitle{
+margin-right: 86px;
+}
+
+
+

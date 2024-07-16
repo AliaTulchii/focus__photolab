@@ -1,0 +1,46 @@
+.btn{
+    width: 300px;
+    border-radius: 4px;
+    padding: 16px 90px; 
+    background: transparent;
+
+font-family: var(--primary-font);
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 16px;
+text-align: center;
+
+
+box-shadow: var(--btn-shadow);
+
+}
+
+.btn__booking{
+    background: var(--btn-bg);
+    color: var(--primary-text);
+
+
+    &:hover, :focus{
+        background: var(--btn-bg-hover);
+    }
+}
+
+.btn__modal{
+
+background: transparent;
+border: none;
+border-radius: 0;
+// border-bottom: solid 1px var(--accent);
+text-decoration: underline;
+}
+
+.btn__feedback{
+    background-color: var(--feedback);
+    color: var(--btn-bg);
+}
+
+.btn__form{
+    position: absolute;
+    bottom: 0;
+}

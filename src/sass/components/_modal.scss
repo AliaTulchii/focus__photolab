@@ -1,0 +1,103 @@
+.modal__overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: rgba(27, 26, 26, 0.492);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.rightmodal{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal__arrowback{
+    position: absolute;
+    top: 5px;
+    left: 0;
+
+    background-color: transparent;
+    color: var(--btn-bg);
+    z-index: 90;
+    cursor: pointer;
+}
+
+.modal__arrowforward{
+    position: absolute;
+    top: 5px;
+    right: 0;
+
+    background-color: transparent;
+    color: var(--btn-bg);
+    z-index: 90;
+    cursor: pointer;
+}
+
+.leftmodals{
+    // position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 102px;
+}
+.modal__container{
+    position: relative;
+    max-width: 420px; 
+    max-height: 100%;
+    background-color: var(--primary-bg); /* Змініть колір на ваш смак */
+    padding: 40px;
+    overflow-y: auto; 
+}
+
+
+.modal__title, .modal__subtitle{
+    margin-bottom: 14px;
+}
+
+
+.modal__list, .modal__sublist{
+    display: flex;
+    flex-direction: column;
+gap: 24px;
+}
+
+.modal__list{
+    margin-bottom: 24px;
+}
+
+
+.modal__text{
+    font-family: var(--primary-font);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.14;
+    text-align: justified;
+    color: var(--modal-text);
+
+    &--accent{
+        margin-right: 10px;
+        font-family: var(--title-font);
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.19;
+        color: var(--accent);
+    }
+
+    &--remark{
+        margin-right: 10px;
+        font-family: var(--title-font);
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1.19;
+        color: var(--accent);
+    }
+}
+
+
