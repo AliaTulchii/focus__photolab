@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { format, startOfDay, addDays, isSameDay } from "date-fns";
+import { format, startOfDay, addDays, isSameDay, addMinutes } from "date-fns";
 import { toDate, format as formatWithTZ } from "date-fns-tz";
 import { uk } from "date-fns/locale";
 import "../../sass/components/_modal.scss";
@@ -37,6 +37,7 @@ const BookingContent: React.FC<HoursSlot> = ({
   const [showLoadMore, setShowLoadMore] = useState<boolean>(true);
 
   const initialDaysToShow = 3;
+  const breakMinutes = 10;
 
   useEffect(() => {
     const fetchBookedDates = async () => {
@@ -103,23 +104,25 @@ const BookingContent: React.FC<HoursSlot> = ({
   }, []);
 
   const generateAvailableHours = (hours: number, day: Date): TimeSlot[] => {
-    const startHour = 9;
+    const startHour = 8;
     const endHour = 21;
-    const interval = hours;
+    const interval = hours * 60 + breakMinutes; // додаємо час перерви
     const availableHours: TimeSlot[] = [];
     const currentTime = new Date();
 
-    for (let i = startHour; i <= endHour - hours; i += interval) {
-      const slotStart = new Date(day);
-      slotStart.setHours(i, 0, 0, 0);
+    for (let i = 0; i <= (endHour - startHour) * 60 - (hours * 60); i += interval) {
+      const slotStart = addMinutes(startOfDay(day), startHour * 60 + i); // початок слота
+      const slotEnd = addMinutes(slotStart, hours * 60); // кінець слота
 
       if (!isSameDay(currentTime, day) || slotStart > currentTime) {
-        const startHourFormatted = `${i < 10 ? "0" : ""}${i}:00`;
-        const endHourFormatted = `${i + hours < 10 ? "0" : ""}${i + hours}:00`;
-        availableHours.push({
-          start: startHourFormatted,
-          end: endHourFormatted,
-        });
+        if (slotEnd.getHours() < endHour || (slotEnd.getHours() === endHour && slotEnd.getMinutes() === 0)) {
+          const startHourFormatted = format(slotStart, "HH:mm");
+          const endHourFormatted = format(slotEnd, "HH:mm");
+          availableHours.push({
+            start: startHourFormatted,
+            end: endHourFormatted,
+          });
+        }
       }
     }
     return availableHours;
