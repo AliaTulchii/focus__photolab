@@ -103,16 +103,16 @@ const BookingContent: React.FC<HoursSlot> = ({
     fetchBookedDates();
   }, []);
 
-  const generateAvailableHours = (hours: number, day: Date): TimeSlot[] => {
+  const generateAvailableHours = (minutes: number, day: Date): TimeSlot[] => {
     const startHour = 8;
     const endHour = 21;
-    const interval = hours * 60 + breakMinutes; // додаємо час перерви
+    const interval = minutes + breakMinutes; // додаємо час перерви
     const availableHours: TimeSlot[] = [];
     const currentTime = new Date();
 
-    for (let i = 0; i <= (endHour - startHour) * 60 - (hours * 60); i += interval) {
+    for (let i = 0; i <= (endHour - startHour) * 60 - minutes; i += interval) {
       const slotStart = addMinutes(startOfDay(day), startHour * 60 + i); // початок слота
-      const slotEnd = addMinutes(slotStart, hours * 60); // кінець слота
+      const slotEnd = addMinutes(slotStart, minutes); // кінець слота
 
       if (!isSameDay(currentTime, day) || slotStart > currentTime) {
         if (slotEnd.getHours() < endHour || (slotEnd.getHours() === endHour && slotEnd.getMinutes() === 0)) {
