@@ -65,7 +65,7 @@ const PaymentContent: React.FC<PaymentContentProps> = ({
           `https://art-studio-api-production.up.railway.app/api/bookings/book?price=${selectedPrice}`,
           {
             customerName: values.name,
-            customerNumber: values.number,
+            customerPhone: values.number,
             customerEmail: values.email,
             bookingDate,
             bookingHours: selectedHours.toString(),
