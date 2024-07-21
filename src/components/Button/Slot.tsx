@@ -13,7 +13,7 @@ const Slot = ({ text,  onClick, className, disabled}: SlotProps) => {
       type='button'
       className={className}
       onClick={onClick}
-      disabled={disabled}>   
+      disabled={disabled}>
      
       {text}
     </button>

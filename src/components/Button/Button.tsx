@@ -9,10 +9,11 @@ type Btn = {
 const Button = ({ text,  onClick, className}: Btn) => {
 
   return (
-      <button  type='button' className={className} onClick={onClick}>      
+      <button  type='button' className={className} onClick={onClick}>
       {text}
     </button>
   )
 }
 
 export default Button
+

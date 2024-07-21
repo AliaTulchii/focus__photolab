@@ -24,7 +24,7 @@ const Booking = () => {
           <Button
             type="button"
             className={"btn btn__booking"}
-            text={"1 година 20 хвилин - 1 грн"}
+            text={"1 година - 1 грн"}
             onClick={() => openModalBooked(80, 1)}
           />
         </li>
