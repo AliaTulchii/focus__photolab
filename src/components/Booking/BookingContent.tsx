@@ -515,23 +515,31 @@ const BookingContent: React.FC<HoursSlot> = ({
       <button type="button" onClick={closeModal} className="modal__arrowback">
         <MdArrowBackIosNew />
       </button>
-      <ul className="modal__bookingdays">
+      <ul className="modal__list booking__list">
       {daysOfMonth.map((day, index) => (
-        <li key={index} className="modal__bookingday">
-          <h4 className="modal__dayname">
+        <li key={index} className="modal__item">
+          <h4 className="booking__title">
             {capitalizeFirstLetter(format(day, "EEEE", { locale: uk }))}
           </h4>
-          <ul className="modal__slots">
+          <ul className="slots__list">
             {availableTimes[format(day, "yyyy-MM-dd")]?.map((slot, index) => {
               const isBooked = isSlotBooked(slot, bookedDates[format(day, "yyyy-MM-dd")] || []);
               return (
-                <Slot
+                <li>
+                  <Slot
                   key={index}
                   text={`${slot.start}-${slot.end}`}
                   onClick={() => handleBooking(day, slot)}
-                  className={`slot ${isBooked ? "disabled" : ""}`}
-                  disabled={isBooked}
+                  className={`slot ${selectedData?.getTime() === day.getTime() &&
+                                            selectedSlot?.start === slot.start &&
+                                            selectedSlot?.end === slot.end
+                                              ? "selected"
+                                              : ""
+                                          } ${isBooked ? "booked" : ""}`}
+                                          disabled={isBooked}
                 />
+                </li>
+                
               );
             })}
           </ul>
