@@ -499,19 +499,26 @@ const BookingContent: React.FC<HoursSlot> = ({
   };
 
   
+  const parseDateWithTZ = (time: string, timeZone: string): Date => {
+    return toDate(new Date(`1970-01-01T${time}:00`), { timeZone });
+  };
+  
   const isSlotBooked = (slot: TimeSlot, bookedSlots: TimeSlot[]): boolean => {
-    const slotStart = new Date(`1970-01-01T${slot.start}:00Z`);
-    const slotEnd = new Date(`1970-01-01T${slot.end}:00Z`);
+    const timeZone = 'Europe/Kiev'; // Використовуйте ваш часовий пояс
+  
+    const slotStart = parseDateWithTZ(slot.start, timeZone);
+    const slotEnd = parseDateWithTZ(slot.end, timeZone);
   
     return bookedSlots.some((bookedSlot) => {
-      const bookedStart = new Date(`1970-01-01T${bookedSlot.start}:00Z`);
-      const bookedEnd = new Date(`1970-01-01T${bookedSlot.end}:00Z`);
+      const bookedStart = parseDateWithTZ(bookedSlot.start, timeZone);
+      const bookedEnd = parseDateWithTZ(bookedSlot.end, timeZone);
   
       console.log(`Перевірка перетинання: ${slotStart.toISOString()} - ${slotEnd.toISOString()} з ${bookedStart.toISOString()} - ${bookedEnd.toISOString()}`);
   
       return (slotStart < bookedEnd && slotEnd > bookedStart);
     });
   };
+  
   
 
   return (
