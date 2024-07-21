@@ -500,17 +500,19 @@ const BookingContent: React.FC<HoursSlot> = ({
 
   
   const isSlotBooked = (slot: TimeSlot, bookedSlots: TimeSlot[]): boolean => {
+    const slotStart = new Date(`1970-01-01T${slot.start}:00Z`);
+    const slotEnd = new Date(`1970-01-01T${slot.end}:00Z`);
+  
     return bookedSlots.some((bookedSlot) => {
-      const slotStart = new Date(`1970-01-01T${slot.start}:00Z`);
-      const slotEnd = new Date(`1970-01-01T${slot.end}:00Z`);
       const bookedStart = new Date(`1970-01-01T${bookedSlot.start}:00Z`);
       const bookedEnd = new Date(`1970-01-01T${bookedSlot.end}:00Z`);
   
-      console.log(`Перевірка перетинання: ${slotStart} - ${slotEnd} з ${bookedStart} - ${bookedEnd}`);
+      console.log(`Перевірка перетинання: ${slotStart.toISOString()} - ${slotEnd.toISOString()} з ${bookedStart.toISOString()} - ${bookedEnd.toISOString()}`);
   
       return (slotStart < bookedEnd && slotEnd > bookedStart);
     });
   };
+  
 
   return (
     <div className="modal__container rightmodal">
