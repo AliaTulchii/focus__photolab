@@ -506,6 +506,8 @@ const BookingContent: React.FC<HoursSlot> = ({
       const bookedStart = new Date(`1970-01-01T${bookedSlot.start}:00Z`);
       const bookedEnd = new Date(`1970-01-01T${bookedSlot.end}:00Z`);
   
+      console.log(`Перевірка перетинання: ${slotStart} - ${slotEnd} з ${bookedStart} - ${bookedEnd}`);
+  
       return (slotStart < bookedEnd && slotEnd > bookedStart);
     });
   };
