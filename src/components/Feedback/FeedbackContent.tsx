@@ -4,6 +4,7 @@ import "../../sass/components/_notification.scss";
 import { IoClose } from "react-icons/io5";
 import { transition1 } from "../../transitions/transitions";
 import axios from "axios";
+import Loader from "../Loader/Loader";
 
 interface FeedbackContentProps {
   closeModal: () => void;
@@ -16,6 +17,7 @@ const FeedbackContent: React.FC<FeedbackContentProps> = ({ closeModal }) => {
   });
 
   const [showNotification, setShowNotification] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { value, name } = e.target;
@@ -27,6 +29,7 @@ const FeedbackContent: React.FC<FeedbackContentProps> = ({ closeModal }) => {
 
   const showData = async () => {
     console.log("Form:", form);
+    setLoading(true);
 
     try {
       const response = await axios.post("https://art-studio-tg-admin-bot-production.up.railway.app/send-message", {
@@ -44,6 +47,8 @@ const FeedbackContent: React.FC<FeedbackContentProps> = ({ closeModal }) => {
       }, 3000);
     } catch (error) {
       console.error("Error sending feedback:", error);
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -60,38 +65,42 @@ const FeedbackContent: React.FC<FeedbackContentProps> = ({ closeModal }) => {
         <IoClose className="feedback__close" />
       </button>
       <div className="feedback__formbox">
-        <form
-          action=""
-          className="form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            showData();
-          }}
-        >
-          <div className="form__inputs">
-            <input
-              name="name"
-              value={form.name}
-              onChange={onChange}
-              placeholder="Ваше ім’я"
-              className="form__input form__name"
-            />
-            <textarea
-              name="feedback"
-              value={form.feedback}
-              onChange={onChange}
-              placeholder="Ваш відгук"
-              className="form__input form__textarea"
-            />
-          </div>
-
-          
-          <button
-            type="submit"
-            className="btn btn__booking btn__form">
-            Надіслати відгук
-          </button>
-        </form>
+        {loading ? (
+          <Loader loaderStyle={'fdbckloader'} />
+        ) : (
+          <form
+            action=""
+            className="form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              showData();
+            }}
+          >
+            <div className="form__inputs">
+              <input
+                name="name"
+                value={form.name}
+                onChange={onChange}
+                placeholder="Ваше ім’я"
+                className="form__input form__name"
+              />
+              <textarea
+                name="feedback"
+                value={form.feedback}
+                onChange={onChange}
+                placeholder="Ваш відгук"
+                className="form__input form__textarea"
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn btn__booking btn__form"
+              disabled={loading} 
+            >
+              "Надіслати відгук"
+            </button>
+          </form>
+        )}
       </div>
       {showNotification && (
         <motion.div
