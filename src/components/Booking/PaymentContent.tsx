@@ -50,9 +50,15 @@
 //       const zonedDate = toDate(selectedStartDate, { timeZone });
 //       const bookingDate = zonedDate.toISOString();
 
+//       // Перетворення selectedHours в формат годин і хвилин
+//       const hours = Math.floor(selectedHours / 60);
+//       const minutes = selectedHours % 60;
+//       const formattedSelectedHours = `${hours}год ${minutes}мін`;
+
 //       console.log("Selected start date:", selectedStartDate);
 //       console.log("Zoned date:", zonedDate);
 //       console.log("Booking date (ISO):", bookingDate);
+//       console.log("Selected hours (formatted):", formattedSelectedHours);
 
 //       try {
 //         console.log("Submitting form...");
@@ -68,7 +74,7 @@
 //             customerPhone: values.number,
 //             customerEmail: values.email,
 //             bookingDate,
-//             bookingHours: selectedHours.toString(),
+//             bookingHours: formattedSelectedHours.toString(),
 //             productPrice: selectedPrice
 //           }
 //         );
@@ -183,10 +189,11 @@
 // export default PaymentContent;
 
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { IoClose } from "react-icons/io5";
 import "../../sass/components/_payment.scss";
+import "../../sass/components/_loader.scss";
 import axios from "axios";
 import { format } from "date-fns";
 import { toDate } from "date-fns-tz";
@@ -208,6 +215,8 @@ const PaymentContent: React.FC<PaymentContentProps> = ({
   selectedHours,
   closeModal,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -235,7 +244,6 @@ const PaymentContent: React.FC<PaymentContentProps> = ({
       const zonedDate = toDate(selectedStartDate, { timeZone });
       const bookingDate = zonedDate.toISOString();
 
-      // Перетворення selectedHours в формат годин і хвилин
       const hours = Math.floor(selectedHours / 60);
       const minutes = selectedHours % 60;
       const formattedSelectedHours = `${hours}год ${minutes}мін`;
@@ -244,6 +252,8 @@ const PaymentContent: React.FC<PaymentContentProps> = ({
       console.log("Zoned date:", zonedDate);
       console.log("Booking date (ISO):", bookingDate);
       console.log("Selected hours (formatted):", formattedSelectedHours);
+
+      setIsLoading(true);
 
       try {
         console.log("Submitting form...");
@@ -259,7 +269,7 @@ const PaymentContent: React.FC<PaymentContentProps> = ({
             customerPhone: values.number,
             customerEmail: values.email,
             bookingDate,
-            bookingHours: formattedSelectedHours.toString(), // Перевірте, що це значення передається у хвилинах
+            bookingHours: formattedSelectedHours.toString(), 
             productPrice: selectedPrice
           }
         );
@@ -285,10 +295,12 @@ const PaymentContent: React.FC<PaymentContentProps> = ({
             window.location.href = `https://art-studio-api-production.up.railway.app/api/payments/payment-form?currency=UAH&productName[]=photosession&productCount[]=1&bookingId=${bookingId}`;
           } else {
             console.error("Error in payment request:", paymentResponse.data);
+            setIsLoading(false);
           }
         }, 1000);
       } catch (error) {
         console.error("Error submitting the form", error);
+        setIsLoading(false);
       }
     },
   });
@@ -367,6 +379,14 @@ const PaymentContent: React.FC<PaymentContentProps> = ({
           </button>
         </form>
       </div>
+
+      {isLoading && (
+        <div className="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      )}
     </motion.div>
   );
 };
