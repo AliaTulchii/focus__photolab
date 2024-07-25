@@ -21,7 +21,6 @@ const Start= () => {
         <Booking/>        
         <Location />
         <RulesOffers />
-
         <Feedback/>        
         </div>
   )

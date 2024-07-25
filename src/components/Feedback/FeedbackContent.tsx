@@ -30,7 +30,7 @@ const FeedbackContent: React.FC<FeedbackContentProps> = ({ closeModal }) => {
 
     try {
       const response = await axios.post("https://art-studio-tg-admin-bot-production.up.railway.app/send-message", {
-        message: `🤎  Клієнт залишив відгук 🤩\n👤  Ім'я клієнта:${form.name}\n💌  Відгук: ${form.feedback}`
+        message: `🤎  Клієнт залишив відгук 🤩\n👤  Ім'я клієнта: ${form.name}\n💌  Відгук: ${form.feedback}`
       });
 
       console.log("Response:", response);
@@ -41,7 +41,7 @@ const FeedbackContent: React.FC<FeedbackContentProps> = ({ closeModal }) => {
       setShowNotification(true);
       setTimeout(() => {
         setShowNotification(false);
-      }, 2000);
+      }, 3000);
     } catch (error) {
       console.error("Error sending feedback:", error);
     }

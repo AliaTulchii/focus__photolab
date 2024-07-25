@@ -1,22 +1,13 @@
 .notification{
-    // position: absolute;
-    // top: 50%;
-    // left: 20%;
-    // padding: 46px 55px;
-    // // width: 250px;
-    // // height: 120px;
-    // background-color: var(--feedback);
-    // text-align: center;
-    // z-index: 90;
-    position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #f0f0f0;
-  padding: 10px 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    padding: 46px 55px;
+
+    background-color: var(--feedback);
+    text-align: center;
+    z-index: 1000;
+
 }
 
 .notification__text{

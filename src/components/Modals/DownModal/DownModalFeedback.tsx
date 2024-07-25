@@ -1,16 +1,14 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-interface DownModalProps {
+interface DownModalFeedbackProps {
   showFeedback: boolean;
   openModal: () => void;
   closeModal: () => void;
   children: any;
-  selectedData: any;
-  selectedSlot: any;
 }
 
-const DownModal: React.FC<DownModalProps> = ({
+const DownModalFeedback: React.FC<DownModalFeedbackProps> = ({
   showFeedback,
   closeModal,
   children,
@@ -33,6 +31,6 @@ const DownModal: React.FC<DownModalProps> = ({
   );
 };
 
-export default DownModal;
+export default DownModalFeedback;
 
 

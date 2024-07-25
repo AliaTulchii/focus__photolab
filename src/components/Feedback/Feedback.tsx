@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Button from "../Button/Button";
-import DownModal from "../Modals/DownModal/DownModal";
+import DownModalFeedback from "../Modals/DownModal/DownModalFeedback";
 import FeedbackContent from "./FeedbackContent";
+
 
 const Feedback = () => {
   const [showFeedback, setShowFeedback] = useState(false);
@@ -22,13 +23,13 @@ const Feedback = () => {
         text={"Залишити відгук"}
         onClick={openModal}
       />
-      <DownModal
+      <DownModalFeedback
         showFeedback={showFeedback}
         openModal={openModal}
         closeModal={closeModal}
       >
         <FeedbackContent closeModal={closeModal} />
-      </DownModal>
+      </DownModalFeedback>
     </div>
   );
 };
