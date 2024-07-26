@@ -115,6 +115,86 @@ const PaymentContent: React.FC<PaymentContentProps> = ({
   });
 
   return (
+    // <motion.div
+    //   onClick={(e) => e.stopPropagation()}
+    //   initial={{ y: "100%" }}
+    //   animate={{ y: "0%" }}
+    //   exit={{ y: "100%" }}
+    //   transition={{ duration: 0.5 }}
+    //   className="feedback__content container"
+    // >
+    //   <div className="box__payment">
+    //     <h1 className="title">Оплата</h1>
+    //     <button className="payment__btn" onClick={closeModal}>
+    //       <IoClose className="feedback__close" />
+    //     </button>
+    //   </div>
+
+    //   <div className="box__booking">
+    //     <h2 className="payment__subtitle">Бронювання:</h2>
+    //     <p className="payment__text">
+    //       {selectedData?.toLocaleDateString()}{" "}
+    //       {selectedSlot ? `${selectedSlot.start}-${selectedSlot.end}` : ""}
+    //     </p>
+    //   </div>
+
+    //   <div className="box__line" />
+
+    //   <div className="feedback__formbox">
+    //     <form action="" className="form" onSubmit={formik.handleSubmit}>
+    //       <div className="form__inputs">
+    //         <input
+    //           name="name"
+    //           value={formik.values.name}
+    //           onChange={formik.handleChange}
+    //           onBlur={formik.handleBlur}
+    //           placeholder="Ваше ім’я"
+    //           className="form__input form__name"
+    //         />
+    //         {formik.touched.name && formik.errors.name ? (
+    //           <div className="form__error">{formik.errors.name}</div>
+    //         ) : null}
+    //         <input
+    //           name="number"
+    //           value={formik.values.number}
+    //           onChange={formik.handleChange}
+    //           onBlur={formik.handleBlur}
+    //           placeholder="Номер телефону"
+    //           className="form__input form__name"
+    //         />
+    //         {formik.touched.number && formik.errors.number ? (
+    //           <div className="form__error">{formik.errors.number}</div>
+    //         ) : null}
+    //         <input
+    //           name="email"
+    //           value={formik.values.email}
+    //           onChange={formik.handleChange}
+    //           onBlur={formik.handleBlur}
+    //           placeholder="E-mail адреса"
+    //           className="form__input form__name"
+    //         />
+    //         {formik.touched.email && formik.errors.email ? (
+    //           <div className="form__error">{formik.errors.email}</div>
+    //         ) : null}
+    //       </div>
+
+    //       <div className="box__topay">
+    //         <h2 className="payment__subtitle">До сплати:</h2>
+    //         <p className="payment__text">{selectedPrice} грн</p>
+    //       </div>
+
+    //       <button type="submit" className="btn btn__booking">
+    //         Сплатити
+    //       </button>
+    //     </form>
+    //   </div>
+
+    //   {isLoading && (
+    //     <Loader loaderStyle={'loader'} />
+    //   )}
+    // </motion.div>
+
+
     <motion.div
       onClick={(e) => e.stopPropagation()}
       initial={{ y: "100%" }}
@@ -123,76 +203,79 @@ const PaymentContent: React.FC<PaymentContentProps> = ({
       transition={{ duration: 0.5 }}
       className="feedback__content container"
     >
-      <div className="box__payment">
-        <h1 className="title">Оплата</h1>
-        <button className="payment__btn" onClick={closeModal}>
-          <IoClose className="feedback__close" />
-        </button>
-      </div>
-
-      <div className="box__booking">
-        <h2 className="payment__subtitle">Бронювання:</h2>
-        <p className="payment__text">
-          {selectedData?.toLocaleDateString()}{" "}
-          {selectedSlot ? `${selectedSlot.start}-${selectedSlot.end}` : ""}
-        </p>
-      </div>
-
-      <div className="box__line" />
-
-      <div className="feedback__formbox">
-        <form action="" className="form" onSubmit={formik.handleSubmit}>
-          <div className="form__inputs">
-            <input
-              name="name"
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder="Ваше ім’я"
-              className="form__input form__name"
-            />
-            {formik.touched.name && formik.errors.name ? (
-              <div className="form__error">{formik.errors.name}</div>
-            ) : null}
-            <input
-              name="number"
-              value={formik.values.number}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder="Номер телефону"
-              className="form__input form__name"
-            />
-            {formik.touched.number && formik.errors.number ? (
-              <div className="form__error">{formik.errors.number}</div>
-            ) : null}
-            <input
-              name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              placeholder="E-mail адреса"
-              className="form__input form__name"
-            />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="form__error">{formik.errors.email}</div>
-            ) : null}
+      {isLoading ? (
+        <Loader loaderStyle="loader" />
+      ) : (
+        <>
+          <div className="box__payment">
+            <h1 className="title">Оплата</h1>
+            <button className="payment__btn" onClick={closeModal}>
+              <IoClose className="feedback__close" />
+            </button>
           </div>
 
-          <div className="box__topay">
-            <h2 className="payment__subtitle">До сплати:</h2>
-            <p className="payment__text">{selectedPrice} грн</p>
+          <div className="box__booking">
+            <h2 className="payment__subtitle">Бронювання:</h2>
+            <p className="payment__text">
+              {selectedData?.toLocaleDateString()}{" "}
+              {selectedSlot ? `${selectedSlot.start}-${selectedSlot.end}` : ""}
+            </p>
           </div>
 
-          <button type="submit" className="btn btn__booking">
-            Сплатити
-          </button>
-        </form>
-      </div>
+          <div className="box__line" />
 
-      {isLoading && (
-        <Loader loaderStyle={'loader'} />
+          <div className="feedback__formbox">
+            <form action="" className="form" onSubmit={formik.handleSubmit}>
+              <div className="form__inputs">
+                <input
+                  name="name"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  placeholder="Ваше ім’я"
+                  className="form__input form__name"
+                />
+                {formik.touched.name && formik.errors.name ? (
+                  <div className="form__error">{formik.errors.name}</div>
+                ) : null}
+                <input
+                  name="number"
+                  value={formik.values.number}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  placeholder="Номер телефону"
+                  className="form__input form__name"
+                />
+                {formik.touched.number && formik.errors.number ? (
+                  <div className="form__error">{formik.errors.number}</div>
+                ) : null}
+                <input
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  placeholder="E-mail адреса"
+                  className="form__input form__name"
+                />
+                {formik.touched.email && formik.errors.email ? (
+                  <div className="form__error">{formik.errors.email}</div>
+                ) : null}
+              </div>
+
+              <div className="box__topay">
+                <h2 className="payment__subtitle">До сплати:</h2>
+                <p className="payment__text">{selectedPrice} грн</p>
+              </div>
+
+              <button type="submit" className="btn btn__booking">
+                Сплатити
+              </button>
+            </form>
+          </div>
+        </>
       )}
     </motion.div>
+
   );
 };
 
