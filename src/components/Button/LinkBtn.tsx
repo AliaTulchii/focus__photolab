@@ -1,12 +1,9 @@
 import '../../sass/components/_button.scss'
-type Btn = {
-  text: string;
-  onClick: () => void;
+interface LinkBtnProps {
   className: string;
-  type: string;
 }
 
-const LinkBtn = ({ className}: Btn) => {
+const LinkBtn: React.FC<LinkBtnProps> = ({className}) => {
 
   return (
       <a   className={className} target='blank' href="https://www.instagram.com/focus.photolab/?utm_source=ig_web_button_share_sheet">      
