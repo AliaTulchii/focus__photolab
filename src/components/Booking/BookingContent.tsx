@@ -42,7 +42,7 @@ const BookingContent: React.FC<HoursSlot> = ({
   useEffect(() => {
     const fetchBookedDates = async () => {
       try {
-        const response = await axios.get("https://art-studio-api-production.up.railway.app/api/bookings/all");
+        const response = await axios.get("https://art-studio-api.onrender.com/api/bookings/all");
         const approvedBookings = response.data.filter((booking: any) => {
           return (
             booking.bookingDate &&
@@ -106,13 +106,13 @@ const BookingContent: React.FC<HoursSlot> = ({
   const generateAvailableHours = (minutes: number, day: Date): TimeSlot[] => {
     const startHour = 8;
     const endHour = 21;
-    const interval = minutes + breakMinutes; // додаємо час перерви
+    const interval = minutes + breakMinutes; 
     const availableHours: TimeSlot[] = [];
     const currentTime = new Date();
 
     for (let i = 0; i <= (endHour - startHour) * 60 - minutes; i += interval) {
-      const slotStart = addMinutes(startOfDay(day), startHour * 60 + i); // початок слота
-      const slotEnd = addMinutes(slotStart, minutes); // кінець слота
+      const slotStart = addMinutes(startOfDay(day), startHour * 60 + i); 
+      const slotEnd = addMinutes(slotStart, minutes); 
 
       if (!isSameDay(currentTime, day) || slotStart > currentTime) {
         if (slotEnd.getHours() < endHour || (slotEnd.getHours() === endHour && slotEnd.getMinutes() === 0)) {
